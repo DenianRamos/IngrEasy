@@ -2,6 +2,8 @@ using IngrEasy.API.Filters;
 using IngrEasy.API.Middleware;
 using IngrEasy.Application;
 using IngrEasy.Infrastructure;
+using IngrEasy.Infrastructure.Extensions;
+using IngrEasy.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,4 +34,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDataBase(builder.Configuration);
 app.Run();
+
+void MigrateDataBase(IConfiguration configuration)
+{
+    var connectionString = configuration.AddConnectionString();
+    DataBaseMigration.Migrate(connectionString!);
+}
