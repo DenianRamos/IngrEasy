@@ -1,13 +1,16 @@
 ﻿using Dapper;
+using FluentMigrator.Runner;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 
 namespace IngrEasy.Infrastructure.Migrations;
 
 public static class DataBaseMigration
 {
-    public static void Migrate(string connectionString)
+    public static void Migrate(string connectionString,IServiceProvider serviceProvider)
     {
         EnsureDatabaseCreated(connectionString);
+        MigrationDataBase(serviceProvider);
     }
     
     private static void EnsureDatabaseCreated(string connectionString)
@@ -31,4 +34,14 @@ public static class DataBaseMigration
         }
     }
 
+
+    private static void MigrationDataBase(IServiceProvider serviceProvider)
+    {
+        var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+        
+        runner.ListMigrations();
+        runner.MigrateUp();
+        
+        
+    }
 }
