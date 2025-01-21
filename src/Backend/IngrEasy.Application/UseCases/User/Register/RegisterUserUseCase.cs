@@ -43,7 +43,7 @@ public class RegisterUserUseCase : IRegisterUseUseCase
        await _unitOfWork.Commit();
         return new ResponseRegisterUserJson
         {
-            Name = request.Name
+            Name = user.Name
         };
     }
 
