@@ -1,9 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace IngrEasy.Infrastructure.Extensions;
 
 public static class ConfigurationExtension
 {
+
+
+
     public static string? AddConnectionString(this IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -12,5 +16,10 @@ public static class ConfigurationExtension
             throw new ArgumentException("The connection string cannot be null or empty.", nameof(connectionString));
         }
         return connectionString;
+    }
+    
+    public static bool isTestEnvironment(this IConfiguration configuration)
+    {
+       return configuration.GetValue<bool>("InMemoryTest");
     }
 }

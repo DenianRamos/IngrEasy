@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\IngrEasy.Communication\IngrEasy.Communication.csproj" />
+      <ProjectReference Include="..\..\Shared\IngrEasy.Exception\IngrEasy.Exception.csproj" />
       <ProjectReference Include="..\..\Shared\IngrEasy.Exception\IngrEasy.Exception\IngrEasy.Exception.csproj" />
       <ProjectReference Include="..\IngrEasy.Domain\IngrEasy.Domain.csproj" />
     </ItemGroup>
