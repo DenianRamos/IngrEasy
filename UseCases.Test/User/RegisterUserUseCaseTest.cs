@@ -51,7 +51,7 @@ public class RegisterUserUseCaseTest
             .Where(e => e.Errors.Count == 1 && e.Errors.Contains(ResourceErrorMessage.NAME_EMPTY));
     }
 
-    private RegisterUserUseCase CreateUseCase(string? email = null)
+    private static RegisterUserUseCase CreateUseCase(string? email = null)
     {
         var mapper = MapperBuilder.Build();
         var unitForWork = UnitOfWorkBuilder.Build();

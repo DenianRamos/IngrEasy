@@ -1,0 +1,9 @@
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace IngrEasy.Domain.Extensions;
+
+public static class StringExtension
+{
+    public static bool  EmptyString([NotNullWhen(true)] this string? value) => (string.IsNullOrWhiteSpace(value).IsFalse());
+
+}

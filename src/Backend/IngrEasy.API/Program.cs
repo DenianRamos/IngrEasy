@@ -49,5 +49,8 @@ void MigrateDataBase(IConfiguration configuration)
 
 public partial class Program
 {
-    
+    protected Program()
+    {
+        
+    }
 }
