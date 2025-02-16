@@ -14,7 +14,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\IngrEasy.Communication\IngrEasy.Communication.csproj" />
       <ProjectReference Include="..\..\Shared\IngrEasy.Exception\IngrEasy.Exception.csproj" />
-      <ProjectReference Include="..\..\Shared\IngrEasy.Exception\IngrEasy.Exception\IngrEasy.Exception.csproj" />
       <ProjectReference Include="..\IngrEasy.Application\IngrEasy.Application.csproj" />
       <ProjectReference Include="..\IngrEasy.Infrastructure\IngrEasy.Infrastructure.csproj" />
     </ItemGroup>

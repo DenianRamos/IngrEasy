@@ -1,3 +1,4 @@
+using IngrEasy.API.Converters;
 using IngrEasy.API.Filters;
 using IngrEasy.API.Middleware;
 using IngrEasy.Application;
@@ -9,12 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 builder.Services.AddApplication(builder.Configuration);
+
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 

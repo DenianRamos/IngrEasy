@@ -29,6 +29,7 @@ public class RegisterUserUseCase : IRegisterUseUseCase
         _mapper = mapper;
         _passwordEncripter = passwordEncripter;
         _unitOfWork = unitOfWork;
+        
     }
 
     public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
