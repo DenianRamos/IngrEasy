@@ -41,7 +41,7 @@ app.Run();
 
 void MigrateDataBase(IConfiguration configuration)
 {
-    if (configuration.isTestEnvironment())
+    if (configuration.IsTestEnvironment())
         return;
     
     var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();

@@ -87,6 +87,15 @@ namespace IngrEasy.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O email e/ou a Senha esta invalida.
+        /// </summary>
+        internal static string EMAIL_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome é vazio.
         /// </summary>
         internal static string NAME_EMPTY {

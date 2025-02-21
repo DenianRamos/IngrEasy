@@ -6,7 +6,7 @@ namespace IngrEasy.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 
-public class UserController : ControllerBase
+public class UserController : IngrEasyController
 {
     
     [ProducesResponseType(typeof(RequestRegisterUserJson), StatusCodes.Status201Created)]

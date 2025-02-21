@@ -7,7 +7,7 @@ using IngrEasy.Application.UseCases.User.Register;
 using IngrEasy.Exception;
 using IngrEasy.Exception.ExceptionBase;
 
-namespace UseCases.Test.User;
+namespace UseCases.Test.User.Register;
 
 public class RegisterUserUseCaseTest
 {

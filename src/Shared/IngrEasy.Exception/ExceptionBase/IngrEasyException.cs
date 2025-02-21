@@ -2,5 +2,9 @@
 
 public class IngrEasyException : SystemException
 {
-    
+    public IngrEasyException(string message) : base(message)
+    {
+        
+    }
+
 }

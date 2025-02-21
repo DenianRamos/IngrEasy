@@ -39,4 +39,7 @@
     <data name="UNKNOW_ERROR" xml:space="preserve">
         <value>Erro desconhecido</value>
     </data>
+    <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+        <value>O email e/ou a Senha esta invalida</value>
+    </data>
 </root>

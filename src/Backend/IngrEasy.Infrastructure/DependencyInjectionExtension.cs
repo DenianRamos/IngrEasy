@@ -17,7 +17,7 @@ public static class DependencyInjectionExtension
     {
         services.AddRepositories();
         
-        if (configuration.isTestEnvironment())
+        if (configuration.IsTestEnvironment())
             return;
 
         services.AddDbContext(configuration);

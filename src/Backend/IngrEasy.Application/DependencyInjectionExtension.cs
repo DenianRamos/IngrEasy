@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using IngrEasy.Application.Services.AutoMapper;
 using IngrEasy.Application.Services.Cryptography;
+using IngrEasy.Application.UseCases.User.Login;
+using IngrEasy.Application.UseCases.User.Login.DoLogin;
 using IngrEasy.Application.UseCases.User.Register;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,7 @@ public static class DependencyInjectionExtension
     private static void AddUseCases(this IServiceCollection services)
     {
         services.AddScoped<IRegisterUseUseCase, RegisterUserUseCase>();
+        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
     }
     
     

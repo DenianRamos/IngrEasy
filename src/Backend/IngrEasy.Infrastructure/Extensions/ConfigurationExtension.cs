@@ -18,7 +18,7 @@ public static class ConfigurationExtension
         return connectionString;
     }
     
-    public static bool isTestEnvironment(this IConfiguration configuration)
+    public static bool IsTestEnvironment(this IConfiguration configuration)
     {
        return configuration.GetValue<bool>("InMemoryTest");
     }
