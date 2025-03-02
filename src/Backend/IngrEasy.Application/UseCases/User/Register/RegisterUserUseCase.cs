@@ -6,6 +6,7 @@ using IngrEasy.Communication.Requests;
 using IngrEasy.Communication.Response;
 using IngrEasy.Domain;
 using IngrEasy.Domain.Repositories.User;
+using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Exception;
 using IngrEasy.Exception.ExceptionBase;
 
@@ -19,9 +20,10 @@ public class RegisterUserUseCase : IRegisterUseUseCase
     private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
     private readonly PasswordEncripter _passwordEncripter;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
 
 
-    public RegisterUserUseCase(IUserReadOnlyRepository userReadOnlyRepository, IUserWriteOnlyRepository userWriteOnlyRepository, IMapper mapper, PasswordEncripter passwordEncripter, IUnitOfWork unitOfWork)
+    public RegisterUserUseCase(IUserReadOnlyRepository userReadOnlyRepository, IUserWriteOnlyRepository userWriteOnlyRepository, IMapper mapper, PasswordEncripter passwordEncripter, IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator)
     {
         _userReadOnlyRepository = userReadOnlyRepository;
         _userWriteOnlyRepository = userWriteOnlyRepository;
@@ -29,7 +31,7 @@ public class RegisterUserUseCase : IRegisterUseUseCase
         _mapper = mapper;
         _passwordEncripter = passwordEncripter;
         _unitOfWork = unitOfWork;
-        
+        _accessTokenGenerator = accessTokenGenerator;
     }
 
     public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
@@ -39,12 +41,17 @@ public class RegisterUserUseCase : IRegisterUseUseCase
         var user = _mapper.Map<Domain.User>(request);
         
         user.Password = _passwordEncripter.Encrypt(request.Password);
+        user.UserIdentifier = Guid.NewGuid();
         
        await _userWriteOnlyRepository.Add(user);
        await _unitOfWork.Commit();
         return new ResponseRegisterUserJson
         {
-            Name = user.Name
+            Name = user.Name,
+            Tokens = new ResponseTokensJson()
+            {
+                AccessToken = _accessTokenGenerator.Generate(user.UserIdentifier)
+            }
         };
     }
 

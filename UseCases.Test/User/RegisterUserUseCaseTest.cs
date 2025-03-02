@@ -2,6 +2,7 @@
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using FluentAssertions;
 using IngrEasy.Application.UseCases.User.Register;
 using IngrEasy.Exception;
@@ -58,11 +59,12 @@ public class RegisterUserUseCaseTest
         var useWriteOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
         var passwordEncrypter = PasswordEncripterBuilder.Build();
         var readRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
+        var jwtTokenGenerator = JwtTokenGeneratorBuilder.Build();
         
         if(string.IsNullOrEmpty(email) == false)
             readRepositoryBuilder.ExistActiveUserWithEmail(email);
         
-        return new RegisterUserUseCase(readRepositoryBuilder.Build(),useWriteOnlyRepository,mapper,passwordEncrypter,unitForWork);
+        return new RegisterUserUseCase(readRepositoryBuilder.Build(),useWriteOnlyRepository,mapper,passwordEncrypter,unitForWork,jwtTokenGenerator );
     }
     
 

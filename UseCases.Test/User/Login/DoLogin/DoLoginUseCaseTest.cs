@@ -3,6 +3,7 @@ using CommonTestUtilities.Entities;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using FluentAssertions;
 using IngrEasy.Application.UseCases.User.Login.DoLogin;
 using IngrEasy.Communication.Requests;
@@ -50,10 +51,11 @@ public class DoLoginUseCaseTest
     {
         var passwordEncrypter = PasswordEncripterBuilder.Build();
         var userReadOnlyRepository = new UserReadOnlyRepositoryBuilder();
+        var jwtTokenGenerator = JwtTokenGeneratorBuilder.Build();
         
         if (user is not null)
             userReadOnlyRepository.GetByEmailAndPassword(user);
         
-        return new DoLoginUseCase(passwordEncrypter, userReadOnlyRepository.Build());
+        return new DoLoginUseCase(passwordEncrypter, userReadOnlyRepository.Build(), jwtTokenGenerator);
     }
 }
