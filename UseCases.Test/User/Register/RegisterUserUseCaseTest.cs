@@ -24,8 +24,9 @@ public class RegisterUserUseCaseTest
         var result =  await useCase.Execute(request);
         
        result.Should().NotBeNull();
+       result.Tokens.Should().NotBeNull();
+       result.Tokens.AccessToken.Should().NotBeNullOrEmpty();
        result.Name.Should().Be(request.Name);
-
     }
     
         [Fact]
