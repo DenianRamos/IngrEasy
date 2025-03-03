@@ -35,4 +35,10 @@
     <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
         <value>E-Mail oder Passwort ist ungültig</value>
     </data>
+    <data name="NO_TOKEN" xml:space="preserve">
+        <value>kein Token</value>
+    </data>
+    <data name="USER_WITHOUT_PERMISSON_ACCESS_RESOURCE" xml:space="preserve">
+        <value>Benutzer ohne Berechtigung zum Zugriff auf diese Ressource</value>
+    </data>
 </root>

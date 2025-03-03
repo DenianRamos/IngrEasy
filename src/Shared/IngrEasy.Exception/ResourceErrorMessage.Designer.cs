@@ -105,6 +105,15 @@ namespace IngrEasy.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Token.
+        /// </summary>
+        public static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password is empty.
         /// </summary>
         public static string PASSWORD_EMPTY {
@@ -128,6 +137,15 @@ namespace IngrEasy.Exception {
         public static string UNKNOW_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not allowed to access this resource.
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSON_ACCESS_RESOURCE {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSON_ACCESS_RESOURCE", resourceCulture);
             }
         }
     }

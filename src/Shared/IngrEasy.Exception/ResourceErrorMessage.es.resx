@@ -36,4 +36,10 @@
         <value>El correo electrónico o la contraseña no son válidos
 </value>
     </data>
+    <data name="NO_TOKEN" xml:space="preserve">
+        <value>sin ficha</value>
+    </data>
+    <data name="USER_WITHOUT_PERMISSON_ACCESS_RESOURCE" xml:space="preserve">
+        <value>Usuario sin permiso para acceder a este recurso</value>
+    </data>
 </root>

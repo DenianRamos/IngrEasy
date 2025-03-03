@@ -6,6 +6,7 @@ using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Infrastructure.DataAcess;
 using IngrEasy.Infrastructure.DataAcess.Repositories;
 using IngrEasy.Infrastructure.Extensions;
+using IngrEasy.Infrastructure.Security.Tokens.Acess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +62,7 @@ public static class DependencyInjectionExtension
         var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
         
         services.AddScoped<IAccessTokenGenerator>( option => new JwtTokenGenerator(signingKey!,expirationTime));
+        services.AddScoped<IAcessTokenValidator>( option => new JwtTokenValidator(signingKey!));
     }
 
 }
