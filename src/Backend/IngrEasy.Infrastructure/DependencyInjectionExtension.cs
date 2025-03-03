@@ -3,10 +3,12 @@ using FluentMigrator.Runner;
 using IngrEasy.Domain;
 using IngrEasy.Domain.Repositories.User;
 using IngrEasy.Domain.Security.Tokens;
+using IngrEasy.Domain.Services.LoggedUser;
 using IngrEasy.Infrastructure.DataAcess;
 using IngrEasy.Infrastructure.DataAcess.Repositories;
 using IngrEasy.Infrastructure.Extensions;
 using IngrEasy.Infrastructure.Security.Tokens.Acess;
+using IngrEasy.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,7 @@ public static class DependencyInjectionExtension
     {
         AddRepositories(services);
         AddToken(services,configuration);
+        AddLoggedUser(services);
         
         if (configuration.IsTestEnvironment())
             return;
@@ -65,4 +68,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IAcessTokenValidator>( option => new JwtTokenValidator(signingKey!));
     }
 
+    
+    private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();
 }
