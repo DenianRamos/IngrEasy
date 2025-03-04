@@ -11,7 +11,7 @@ namespace WebApi.Test;
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
 
-    private  User _user = default!;
+    private  IngrEasy.Domain.User _user = default!;
 
     private string _password = string.Empty;
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -46,6 +46,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public string GetPassword() => _password;
     
     public string GetName() => _user.Name;
+    
+    public Guid GetUserIdentifier() => _user.UserIdentifier;
 
 
     private void StartDataBase(IngrEasyDbContext dbContext)

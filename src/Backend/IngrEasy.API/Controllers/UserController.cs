@@ -1,4 +1,6 @@
-﻿using IngrEasy.Application.UseCases.User.Register;
+﻿using IngrEasy.API.Attributes;
+using IngrEasy.Application.UseCases.User.Profile;
+using IngrEasy.Application.UseCases.User.Register;
 using IngrEasy.Communication.Requests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +17,15 @@ public class UserController : IngrEasyController
     {
         var result =  await useCase.Execute(request);
         return Created(string.Empty,result);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(RequestRegisterUserJson), StatusCodes.Status200OK)]
+    [AuthentificatedUser]
+    public async Task<IActionResult> GetUserProfile([FromServices] IGetUserProfileUsecase useCase)
+    {
+        var result = await useCase.Execute();
+        return Ok(result);
     }
 
 }

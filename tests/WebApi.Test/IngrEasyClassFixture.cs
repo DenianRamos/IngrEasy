@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
 namespace WebApi.Test;
 
@@ -25,4 +26,22 @@ public class IngrEasyClassFixture : IClassFixture<CustomWebApplicationFactory>
         _client.DefaultRequestHeaders.Add("Accept-Language", culture);
     }
 
+    
+    protected async Task<HttpResponseMessage> DoGet(string method, string token, string culture = "en")
+    {
+
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(token);
+        
+        return await _client.GetAsync(method);
+    }
+
+
+    private  void AuthorizeRequest(string token)
+    {
+        if (string.IsNullOrWhiteSpace(token))
+            return;
+        
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+    }
 }

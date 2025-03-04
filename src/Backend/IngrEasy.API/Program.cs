@@ -1,7 +1,9 @@
 using IngrEasy.API.Converters;
 using IngrEasy.API.Filters;
 using IngrEasy.API.Middleware;
+using IngrEasy.API.Token;
 using IngrEasy.Application;
+using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Infrastructure;
 using IngrEasy.Infrastructure.Extensions;
 using IngrEasy.Infrastructure.Migrations;
@@ -42,7 +44,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 builder.Services.AddApplication(builder.Configuration);
-
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddInfrastructure(builder.Configuration);

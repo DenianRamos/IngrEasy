@@ -1,14 +1,11 @@
 ﻿using System.Net;
-using System.Net.Http.Json;
 using System.Text.Json;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
 using IngrEasy.Exception;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using WebApi.Test.InlineData;
 
-namespace WebApi.Test;
+namespace WebApi.Test.User;
 
 public class RegisterUserTest : IngrEasyClassFixture
 {

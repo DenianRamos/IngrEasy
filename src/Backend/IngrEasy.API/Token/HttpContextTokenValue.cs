@@ -4,9 +4,9 @@ namespace IngrEasy.API.Token;
 
 public class HttpContextTokenValue : ITokenProvider
 {
-    private readonly HttpContextAccessor _httpContextAccessor;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public HttpContextTokenValue(HttpContextAccessor httpContextAccessor)
+    public HttpContextTokenValue(IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
     }

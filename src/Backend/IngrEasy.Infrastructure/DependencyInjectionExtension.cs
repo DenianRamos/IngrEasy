@@ -69,5 +69,4 @@ public static class DependencyInjectionExtension
     }
 
     
-    private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();
-}
+    private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();}
