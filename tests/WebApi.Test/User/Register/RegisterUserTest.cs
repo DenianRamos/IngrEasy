@@ -5,7 +5,7 @@ using FluentAssertions;
 using IngrEasy.Exception;
 using WebApi.Test.InlineData;
 
-namespace WebApi.Test.User;
+namespace WebApi.Test.User.Register;
 
 public class RegisterUserTest : IngrEasyClassFixture
 {

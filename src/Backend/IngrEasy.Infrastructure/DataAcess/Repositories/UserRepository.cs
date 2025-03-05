@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IngrEasy.Infrastructure.DataAcess.Repositories;
 
-public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository
+public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository, IUpdateUserOnlyRepository
 {
     private readonly IngrEasyDbContext _dbContext; 
 
@@ -19,5 +19,13 @@ public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository
     }
 
     public async Task<bool> ExistActiveUserWithIdentifier(Guid userIdentifier) => await _dbContext.Users.AnyAsync(user => user.UserIdentifier.Equals(userIdentifier) && user.Active);
+
+    public Task<User> GetById(long id)
+    {
+        return _dbContext.Users.FirstAsync(user => user.Id == id);
+    }
+
+    public void Update(User user) => _dbContext.Users.Update(user);
+
 
 }

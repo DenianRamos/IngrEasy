@@ -5,6 +5,7 @@ using IngrEasy.Application.UseCases.User.Login;
 using IngrEasy.Application.UseCases.User.Login.DoLogin;
 using IngrEasy.Application.UseCases.User.Profile;
 using IngrEasy.Application.UseCases.User.Register;
+using IngrEasy.Application.UseCases.User.Update;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 namespace IngrEasy.Application;
@@ -31,6 +32,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IRegisterUseUseCase, RegisterUserUseCase>();
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         services.AddScoped<IGetUserProfileUsecase, GetUserProfileUseCase>();
+        services.AddScoped<IUpdateUseCase, UpdateUseCase>();
     }
     
     

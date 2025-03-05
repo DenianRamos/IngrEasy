@@ -21,6 +21,7 @@ public class RegisterUserUseCase : IRegisterUseUseCase
     private readonly PasswordEncripter _passwordEncripter;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
+    private readonly IUpdateUserOnlyRepository _updateUserOnlyRepository;
 
 
     public RegisterUserUseCase(IUserReadOnlyRepository userReadOnlyRepository, IUserWriteOnlyRepository userWriteOnlyRepository, IMapper mapper, PasswordEncripter passwordEncripter, IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator)

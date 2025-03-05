@@ -17,6 +17,14 @@ public class IngrEasyClassFixture : IClassFixture<CustomWebApplicationFactory>
         return await _client.PostAsJsonAsync(method, request);
 
     }
+    
+    protected async Task<HttpResponseMessage> DoPut(string method, object request,string token, string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(token);
+        return await _client.PutAsJsonAsync(method,request);
+
+    }
 
     private void ChangeRequestCulture(string culture)
     {
