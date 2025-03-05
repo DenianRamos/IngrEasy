@@ -1,12 +1,13 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using IngrEasy.Domain.Security.Criptography;
 
-namespace IngrEasy.Application.Services.Cryptography;
+namespace IngrEasy.Infrastructure.Security.Cryptography;
 
-public class PasswordEncripter
+public class Sha512Encrypter : IPasswordEncrypter
 {
     private readonly string _additionalKey;
-    public PasswordEncripter( string additionalKey)
+    public Sha512Encrypter( string additionalKey)
     {
         _additionalKey = additionalKey;
     }
@@ -30,5 +31,4 @@ public class PasswordEncripter
 
         return builder.ToString();
     }
-
 }

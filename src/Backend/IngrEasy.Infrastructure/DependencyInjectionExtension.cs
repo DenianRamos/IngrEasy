@@ -2,11 +2,13 @@
 using FluentMigrator.Runner;
 using IngrEasy.Domain;
 using IngrEasy.Domain.Repositories.User;
+using IngrEasy.Domain.Security.Criptography;
 using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Domain.Services.LoggedUser;
 using IngrEasy.Infrastructure.DataAcess;
 using IngrEasy.Infrastructure.DataAcess.Repositories;
 using IngrEasy.Infrastructure.Extensions;
+using IngrEasy.Infrastructure.Security.Cryptography;
 using IngrEasy.Infrastructure.Security.Tokens.Acess;
 using IngrEasy.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,7 @@ public static class DependencyInjectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        AddPasswordEncrypter(services,configuration);
         AddRepositories(services);
         AddToken(services,configuration);
         AddLoggedUser(services);
@@ -69,5 +72,9 @@ public static class DependencyInjectionExtension
         services.AddScoped<IAcessTokenValidator>( option => new JwtTokenValidator(signingKey!));
     }
 
-    
+    private static void AddPasswordEncrypter(this IServiceCollection services, IConfiguration configuration)
+    {
+        var additionalKey = configuration.GetValue<string>("Settings:Password:AdditionalKey");
+        services.AddScoped<IPasswordEncrypter>(opt => new Sha512Encrypter(additionalKey!));
+    }
     private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();}

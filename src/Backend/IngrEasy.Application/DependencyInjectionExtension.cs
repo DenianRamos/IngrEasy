@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using IngrEasy.Application.Services.AutoMapper;
-using IngrEasy.Application.Services.Cryptography;
 using IngrEasy.Application.UseCases.User.Login;
 using IngrEasy.Application.UseCases.User.Login.DoLogin;
 using IngrEasy.Application.UseCases.User.Profile;
@@ -16,7 +15,6 @@ public static class DependencyInjectionExtension
     {
         AddAutoMapper(services);
         AddUseCases(services);
-        AddPasswordEncrypter(services, configuration);
     }
 
     private static void AddAutoMapper(this IServiceCollection services)
@@ -35,10 +33,4 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUpdateUseCase, UpdateUseCase>();
     }
     
-    
-    private static void AddPasswordEncrypter(this IServiceCollection services, IConfiguration configuration)
-    {
-        var additionalKey = configuration.GetValue<string>("Settings:Password:AdditionalKey");
-        services.AddScoped(opt => new PasswordEncripter(additionalKey!));
-    }
 }

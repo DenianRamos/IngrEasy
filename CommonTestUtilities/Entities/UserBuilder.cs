@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using CommonTestUtilities.Cryptography;
-using IngrEasy.Application.Services.Cryptography;
 using IngrEasy.Domain;
 
 namespace CommonTestUtilities.Entities;

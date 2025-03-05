@@ -1,7 +1,7 @@
-﻿using IngrEasy.Application.Services.Cryptography;
-using IngrEasy.Communication.Requests;
+﻿using IngrEasy.Communication.Requests;
 using IngrEasy.Communication.Response;
 using IngrEasy.Domain.Repositories.User;
+using IngrEasy.Domain.Security.Criptography;
 using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Exception.ExceptionBase;
 
@@ -11,10 +11,10 @@ public class DoLoginUseCase : IDoLoginUseCase
 {
     
     private readonly IUserReadOnlyRepository _repository;
-    private readonly PasswordEncripter _passwordEncripter;
+    private readonly IPasswordEncrypter _passwordEncripter;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
 
-    public DoLoginUseCase(PasswordEncripter passwordEncripter, IUserReadOnlyRepository repository, IAccessTokenGenerator accessTokenGenerator)
+    public DoLoginUseCase(IPasswordEncrypter passwordEncripter, IUserReadOnlyRepository repository, IAccessTokenGenerator accessTokenGenerator)
     {
         _passwordEncripter = passwordEncripter;
         _repository = repository;

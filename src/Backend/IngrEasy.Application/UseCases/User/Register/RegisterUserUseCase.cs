@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
 using IngrEasy.Application.Services.AutoMapper;
-using IngrEasy.Application.Services.Cryptography;
 using IngrEasy.Communication.Requests;
 using IngrEasy.Communication.Response;
 using IngrEasy.Domain;
 using IngrEasy.Domain.Repositories.User;
+using IngrEasy.Domain.Security.Criptography;
 using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Exception;
 using IngrEasy.Exception.ExceptionBase;
@@ -18,13 +18,13 @@ public class RegisterUserUseCase : IRegisterUseUseCase
     private readonly IUserReadOnlyRepository _userReadOnlyRepository;
     private readonly IMapper _mapper;
     private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
-    private readonly PasswordEncripter _passwordEncripter;
+    private readonly IPasswordEncrypter _passwordEncripter;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
     private readonly IUpdateUserOnlyRepository _updateUserOnlyRepository;
 
 
-    public RegisterUserUseCase(IUserReadOnlyRepository userReadOnlyRepository, IUserWriteOnlyRepository userWriteOnlyRepository, IMapper mapper, PasswordEncripter passwordEncripter, IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator)
+    public RegisterUserUseCase(IUserReadOnlyRepository userReadOnlyRepository, IUserWriteOnlyRepository userWriteOnlyRepository, IMapper mapper, IPasswordEncrypter passwordEncripter, IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator)
     {
         _userReadOnlyRepository = userReadOnlyRepository;
         _userWriteOnlyRepository = userWriteOnlyRepository;
