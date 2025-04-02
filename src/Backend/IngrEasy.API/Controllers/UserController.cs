@@ -1,4 +1,5 @@
 ﻿using IngrEasy.API.Attributes;
+using IngrEasy.Application.UseCases.User.ChangePassword;
 using IngrEasy.Application.UseCases.User.Profile;
 using IngrEasy.Application.UseCases.User.Register;
 using IngrEasy.Application.UseCases.User.Update;
@@ -31,7 +32,7 @@ public class UserController : IngrEasyController
     }
 
     [HttpPut]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     [AuthentificatedUser]
     public async Task<IActionResult> UpdateUserProfile([FromServices]IUpdateUseCase useCase, [FromBody] RequestUpdateUserJson request)
@@ -39,5 +40,16 @@ public class UserController : IngrEasyController
         await useCase.Execute(request);
         return NoContent();
     }
+
+    [HttpPut("change-password")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ChangePasswordProfile([FromServices] IChangePasswordUseCase useCase,
+        [FromBody] RequestChangePasswordJson request)
+    {
+        await useCase.Execute(request);
+        return NoContent();
+    }
+
 
 }

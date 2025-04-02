@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using IngrEasy.Application.SharedValidators;
 using IngrEasy.Communication.Requests;
 using IngrEasy.Exception;
 
@@ -17,7 +18,6 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
                 RuleFor(x => x.Email).EmailAddress().WithMessage(ResourceErrorMessage.EMAIL_INVALID);
             }
         );
-        RuleFor(x => x.Password).NotEmpty().WithMessage(ResourceErrorMessage.PASSWORD_EMPTY);
-        RuleFor(x => x.Password.Length).GreaterThanOrEqualTo(6).WithMessage(ResourceErrorMessage.PASSWORD_INVALID);
+        RuleFor(x => x.Password).SetValidator(new PasswordValidator<RequestRegisterUserJson>());
     }
 }

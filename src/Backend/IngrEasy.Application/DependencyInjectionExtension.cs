@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IngrEasy.Application.Services.AutoMapper;
+using IngrEasy.Application.UseCases.User.ChangePassword;
 using IngrEasy.Application.UseCases.User.Login;
 using IngrEasy.Application.UseCases.User.Login.DoLogin;
 using IngrEasy.Application.UseCases.User.Profile;
@@ -31,6 +32,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         services.AddScoped<IGetUserProfileUsecase, GetUserProfileUseCase>();
         services.AddScoped<IUpdateUseCase, UpdateUseCase>();
+        services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
     }
     
 }

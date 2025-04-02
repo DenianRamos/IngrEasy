@@ -41,4 +41,7 @@
     <data name="USER_WITHOUT_PERMISSON_ACCESS_RESOURCE" xml:space="preserve">
         <value>Benutzer ohne Berechtigung zum Zugriff auf diese Ressource</value>
     </data>
+    <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+        <value>Das aktuelle Passwort stimmt nicht mit dem angegebenen Passwort überein</value>
+    </data>
 </root>

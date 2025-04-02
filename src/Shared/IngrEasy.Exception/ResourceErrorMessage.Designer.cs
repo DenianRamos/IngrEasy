@@ -114,6 +114,15 @@ namespace IngrEasy.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The current password does not match the provided password.
+        /// </summary>
+        public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("PASSWORD_DIFFERENT_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password is empty.
         /// </summary>
         public static string PASSWORD_EMPTY {
