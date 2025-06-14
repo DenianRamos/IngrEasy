@@ -1,4 +1,5 @@
 ﻿using IngrEasy.Domain;
+using IngrEasy.Domain.Entities;
 using IngrEasy.Domain.Services.LoggedUser;
 using Moq;
 

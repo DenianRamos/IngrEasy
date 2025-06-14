@@ -45,4 +45,13 @@
     <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
         <value>La contraseña actual no coincide con la contraseña proporcionada</value>
     </data>
+    <data name="COOKING_TIME_NOT_SUPPORTED" xml:space="preserve">
+        <value>Tiempo de cocción no admitido</value>
+    </data>
+    <data name="DIFFICULTY_LEVEL_NOT_SUPPORTED" xml:space="preserve">
+        <value>Nivel de dificultad no soportado</value>
+    </data>
+    <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
+        <value>Tipo de plato no compatible</value>
+    </data>
 </root>

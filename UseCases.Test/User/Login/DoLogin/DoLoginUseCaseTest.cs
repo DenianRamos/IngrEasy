@@ -47,7 +47,7 @@ public class DoLoginUseCaseTest
     }
 
 
-    private static DoLoginUseCase CreateUseCase(IngrEasy.Domain.User? user = null)
+    private static DoLoginUseCase CreateUseCase(IngrEasy.Domain.Entities.User? user = null)
     {
         var passwordEncrypter = PasswordEncripterBuilder.Build();
         var userReadOnlyRepository = new UserReadOnlyRepositoryBuilder();

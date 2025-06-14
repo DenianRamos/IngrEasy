@@ -51,4 +51,13 @@
     <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
         <value>A senha atual não corresponde à senha fornecida</value>
     </data>
+    <data name="COOKING_TIME_NOT_SUPPORTED" xml:space="preserve">
+        <value>Tempo de cozimento não suportado</value>
+    </data>
+    <data name="DIFFICULTY_LEVEL_NOT_SUPPORTED" xml:space="preserve">
+        <value>Nivel de cozimento não suportado</value>
+    </data>
+    <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
+        <value>Tipo de Prato Não Suportado</value>
+    </data>
 </root>

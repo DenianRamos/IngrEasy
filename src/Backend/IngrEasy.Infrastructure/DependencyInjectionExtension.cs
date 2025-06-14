@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using FluentMigrator.Runner;
 using IngrEasy.Domain;
+using IngrEasy.Domain.Repositories.Recipe;
 using IngrEasy.Domain.Repositories.User;
 using IngrEasy.Domain.Security.Criptography;
 using IngrEasy.Domain.Security.Tokens;
@@ -48,6 +49,8 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
         services.AddScoped<IUpdateUserOnlyRepository, UserRepository>();
+        services.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
+        services.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
     }
 
     private static void AddFluentMigrator( IServiceCollection services, IConfiguration configuration)

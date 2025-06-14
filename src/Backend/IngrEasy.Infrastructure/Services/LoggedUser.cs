@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using IngrEasy.Domain;
+using IngrEasy.Domain.Entities;
 using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Domain.Services.LoggedUser;
 using IngrEasy.Infrastructure.DataAcess;

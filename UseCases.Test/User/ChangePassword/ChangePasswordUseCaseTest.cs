@@ -47,7 +47,7 @@ public class ChangePasswordUseCaseTest
         var useCase = CreateUseCase(user);
         
         Func<Task> act = async () => await useCase.Execute(request);
-        await act.Should().ThrowAsync<ErrorOnValidationException>().Where(e => e.Errors.Count == 1 && e.Errors.Contains(ResourceErrorMessage.PASSWORD_EMPTY));
+        await act.Should().ThrowAsync<ErrorOnValidationException>().Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains(ResourceErrorMessage.PASSWORD_EMPTY));
         
         var passwordEncrypter = PasswordEncripterBuilder.Build();
         
@@ -69,7 +69,7 @@ public class ChangePasswordUseCaseTest
         var useCase = CreateUseCase(user);
         
         Func<Task> act = async () => await useCase.Execute(request);
-        await act.Should().ThrowAsync<ErrorOnValidationException>().Where(e => e.Errors.Count == 1 && e.Errors.Contains(ResourceErrorMessage.PASSWORD_EMPTY));
+        await act.Should().ThrowAsync<ErrorOnValidationException>().Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains(ResourceErrorMessage.PASSWORD_EMPTY));
         
         var passwordEncrypter = PasswordEncripterBuilder.Build();
         
@@ -77,7 +77,7 @@ public class ChangePasswordUseCaseTest
     }
 
 
-    private static ChangePasswordUseCase CreateUseCase(IngrEasy.Domain.User user)
+    private static ChangePasswordUseCase CreateUseCase(IngrEasy.Domain.Entities.User user)
     {
         var unitOfWork = UnitOfWorkBuilder.Build();
         var updateUserOnlyRepository = new UserUpdateOnlyRepositoryBuilder().GetById(user).Build();

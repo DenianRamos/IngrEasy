@@ -10,7 +10,5 @@ public class RequestLoginJsonBuilder
         return new Faker<RequestLoginJson>()
             .RuleFor(x => x.Email, f => f.Internet.Email())
             .RuleFor(x => x.Password, f => f.Internet.Password());
-        
-        
     }
 }

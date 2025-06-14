@@ -1,4 +1,6 @@
 using IngrEasy.Communication.Enums;
+using IngrEasy.Domain;
+using DishType = IngrEasy.Communication.Enums.DishType;
 
 namespace IngrEasy.Communication.Requests;
 

@@ -1,5 +1,8 @@
-﻿namespace IngrEasy.Domain;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace IngrEasy.Domain;
+
+[Table("Instructions")]
 public class Instruction : EntityBase
 {
     public int Step { get; set; }

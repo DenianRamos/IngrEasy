@@ -24,7 +24,7 @@ public class UserController : IngrEasyController
 
     [HttpGet]
     [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
-    [AuthentificatedUser]
+    [AuthenticatedUser]
     public async Task<IActionResult> GetUserProfile([FromServices] IGetUserProfileUsecase useCase)
     {
         var result = await useCase.Execute();
@@ -34,7 +34,7 @@ public class UserController : IngrEasyController
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-    [AuthentificatedUser]
+    [AuthenticatedUser]
     public async Task<IActionResult> UpdateUserProfile([FromServices]IUpdateUseCase useCase, [FromBody] RequestUpdateUserJson request)
     {
         await useCase.Execute(request);

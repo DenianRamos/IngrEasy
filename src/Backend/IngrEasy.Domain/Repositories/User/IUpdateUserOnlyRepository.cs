@@ -2,8 +2,8 @@
 
 public interface IUpdateUserOnlyRepository
 {
-    public Task<Domain.User> GetById(long id);
+    public Task<Entities.User> GetById(long id);
     
-    public void Update(Domain.User user);
+    public void Update(Entities.User user);
     
 }

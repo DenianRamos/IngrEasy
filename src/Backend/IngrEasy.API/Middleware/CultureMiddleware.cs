@@ -19,7 +19,7 @@ public class CultureMiddleware
         
         var cultureInfo = new CultureInfo("en");
 
-        if (requestCulture.EmptyString() && supportedLanguages.Exists(x => x.Name == requestCulture))
+        if (requestCulture.NotEmpty() && supportedLanguages.Exists(x => x.Name == requestCulture))
             cultureInfo = new CultureInfo(requestCulture);
         
         CultureInfo.CurrentCulture = cultureInfo;

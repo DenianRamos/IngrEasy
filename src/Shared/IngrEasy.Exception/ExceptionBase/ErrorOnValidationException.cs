@@ -2,10 +2,10 @@
 
 public class ErrorOnValidationException : IngrEasyException
 {
-    public IList<string> Errors { get; set; }
+    public IList<string> ErrorMessage { get; set; }
     
-    public ErrorOnValidationException(IList<string> errors) : base(string.Empty)
+    public ErrorOnValidationException(IList<string> errorMessage) : base(string.Empty)
     {
-        Errors = errors;
+        ErrorMessage = errorMessage;
     }
 }

@@ -10,9 +10,10 @@ public class Recipe : EntityBase
     
     public Difficulty? Difficulty { get; set; }
     
-    public IList<Ingredient> Ingredients { get; set; }
+    public IList<Instruction> Instructions { get; set; } = [];
+    public IList<Ingredient> Ingredients { get; set; } = [];
     
-    public IList<DishType> DishTypes { get; set; }
+    public IList<DishType>? DishTypes { get; set; } = [];
     
     public int UserId { get; set; }
 }

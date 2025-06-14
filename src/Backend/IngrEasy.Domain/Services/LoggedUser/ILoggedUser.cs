@@ -1,4 +1,6 @@
-﻿namespace IngrEasy.Domain.Services.LoggedUser;
+﻿using IngrEasy.Domain.Entities;
+
+namespace IngrEasy.Domain.Services.LoggedUser;
 
 public interface ILoggedUser
 {
