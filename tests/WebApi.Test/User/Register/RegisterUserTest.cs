@@ -40,7 +40,7 @@ public class RegisterUserTest : IngrEasyClassFixture
         request.Name = string.Empty;
         
         
-        var response = await DoPost("User", request,culture);
+        var response = await DoPost(method:"User", request:request,culture:culture);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         
