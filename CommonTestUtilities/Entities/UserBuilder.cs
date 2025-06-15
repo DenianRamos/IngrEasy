@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using CommonTestUtilities.Cryptography;
 using IngrEasy.Domain;
+using IngrEasy.Domain.Entities;
 
 namespace CommonTestUtilities.Entities;
 
@@ -11,7 +12,7 @@ public class UserBuilder
         
         var passwordEncrypter = PasswordEncripterBuilder.Build();
         var password = new Faker().Internet.Password();
-        var user = new Faker<IngrEasy.Domain.User>()
+        var user = new Faker<User>()
             .RuleFor(user => user.Id, () => 1)
             .RuleFor(user => user.Email, (f, user) => f.Internet.Email(user.Name))
             .RuleFor(user => user.Password, () => passwordEncrypter.Encrypt(password))

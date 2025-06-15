@@ -39,7 +39,7 @@ public class RegisterUserUseCase : IRegisterUseUseCase
     {
         await Validate(request);
         
-        var user = _mapper.Map<Domain.User>(request);
+        var user = _mapper.Map<Domain.Entities.User>(request);
         
         user.Password = _passwordEncripter.Encrypt(request.Password);
         user.UserIdentifier = Guid.NewGuid();

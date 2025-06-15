@@ -161,6 +161,21 @@ public class RecipeValidatorTest
         result.IsValid.Should().BeFalse();
         result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == "Duas ou mais instruções com a mesma ordem");
     }
+
+    [Fact]
+    public void Error_Instruction_Too_Long()
+    {
+        var request = RequestRecipeJsonBuilder.Build();
+        request.Instructions.First().Text = RequestStringGenerator.Paragraphs(minCharacters: 2001);
+        
+        var validator = new RecipeValidator();
+        var result = validator.Validate(request);
+
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().ContainSingle().And
+            .Contain(e => e.ErrorMessage.Equals("Texto deve ter no maximo 2000 caracteres"));
+
+    }
     
     
     

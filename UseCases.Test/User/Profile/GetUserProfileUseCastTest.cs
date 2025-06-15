@@ -21,7 +21,7 @@ public class GetUserProfileUseCastTest
         result.Email.Should().NotBeNull(user.Email);
     }
 
-    private static GetUserProfileUseCase CreateUseCase(IngrEasy.Domain.User user)
+    private static GetUserProfileUseCase CreateUseCase(IngrEasy.Domain.Entities.User user)
     {
         var mapper = MapperBuilder.Build();
         var loggerUser = LoggedUserBuilder.Build(user);

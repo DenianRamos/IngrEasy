@@ -50,7 +50,7 @@ public class UpdateUserUseCaseTest
         };
         
         await act.Should().ThrowAsync<ErrorOnValidationException>().
-            Where(e => e.Errors.Count == 1 && e.Errors.Contains(ResourceErrorMessage.NAME_EMPTY));
+            Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains(ResourceErrorMessage.NAME_EMPTY));
        
        user.Name.Should().NotBe(request.Name);
        user.Email.Should().NotBe(request.Email);
@@ -71,7 +71,7 @@ public class UpdateUserUseCaseTest
         };
         
         await act.Should().ThrowAsync<ErrorOnValidationException>().
-            Where(e => e.Errors.Count == 1 && e.Errors.Contains(ResourceErrorMessage.EMAIL_ALREADY_EXIST));
+            Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains(ResourceErrorMessage.EMAIL_ALREADY_EXIST));
        
         user.Name.Should().NotBe(request.Name);
         user.Email.Should().NotBe(request.Email);
@@ -80,7 +80,7 @@ public class UpdateUserUseCaseTest
 
 
 
-    private async Task<UpdateUseCase> CreateUseCase(IngrEasy.Domain.User user, string email = null)
+    private async Task<UpdateUseCase> CreateUseCase(IngrEasy.Domain.Entities.User user, string email = null)
     {
         var unitofWork = UnitOfWorkBuilder.Build();
         var userUpdateOnlyRepository = new UserUpdateOnlyRepositoryBuilder().GetById(user).Build();

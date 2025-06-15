@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Backend\IngrEasy.Domain\IngrEasy.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

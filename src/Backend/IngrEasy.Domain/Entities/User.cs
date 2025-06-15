@@ -1,4 +1,4 @@
-﻿namespace IngrEasy.Domain;
+﻿namespace IngrEasy.Domain.Entities;
 
 public class User : EntityBase
 {

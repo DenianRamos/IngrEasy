@@ -41,7 +41,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         
     }
 
-    private void Validate(RequestChangePasswordJson request, Domain.User loggedUser)
+    private void Validate(RequestChangePasswordJson request, Domain.Entities.User loggedUser)
     {
         var result = new ChangePasswordValidator().Validate(request);
 

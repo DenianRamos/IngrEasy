@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace IngrEasy.API.Attributes;
 
-public class AuthentificatedUserAttribute : TypeFilterAttribute
+public class AuthenticatedUser : TypeFilterAttribute
 {
-    public AuthentificatedUserAttribute() : base(typeof(AuthentificatedUserFilter))
+    public AuthenticatedUser() : base(typeof(AuthentificatedUserFilter))
     {
     }
 }

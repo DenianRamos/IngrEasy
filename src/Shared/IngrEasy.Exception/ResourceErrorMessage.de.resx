@@ -44,4 +44,13 @@
     <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
         <value>Das aktuelle Passwort stimmt nicht mit dem angegebenen Passwort überein</value>
     </data>
+    <data name="COOKING_TIME_NOT_SUPPORTED" xml:space="preserve">
+        <value>Koha e gatimit nuk mbështetet</value>
+    </data>
+    <data name="DIFFICULTY_LEVEL_NOT_SUPPORTED" xml:space="preserve">
+        <value>Schwierigkeitsgrad nicht unterstützt</value>
+    </data>
+    <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
+        <value>Nicht unterstützter Geschirrtyp</value>
+    </data>
 </root>
