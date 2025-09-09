@@ -5,5 +5,5 @@ namespace IngrEasy.Application.UseCases.Recipe.Filter;
 
 public interface IFilterRecipeUseCase
 {
-    Task<ResponseRecipesJson> Execute(RequestsFilterRecipeJson request);
+    Task<ResponseRecipesJson> Execute(RequestFilterRecipeJson request);
 }

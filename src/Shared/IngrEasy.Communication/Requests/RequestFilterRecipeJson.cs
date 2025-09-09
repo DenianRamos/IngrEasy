@@ -2,7 +2,7 @@ using IngrEasy.Communication.Enums;
 
 namespace IngrEasy.Communication.Requests;
 
-public class RequestsFilterRecipeJson
+public class RequestFilterRecipeJson
 {
     public string RecipeTitle_Ingredient { get; set; } = string.Empty;
 

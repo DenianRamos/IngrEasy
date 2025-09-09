@@ -25,7 +25,7 @@ public class RecipeController : IngrEasyController
     [ProducesResponseType(typeof(ResponseRecipesJson), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Filter([FromServices] IFilterRecipeUseCase useCase,
-        [FromBody] RequestsFilterRecipeJson request)
+        [FromBody] RequestFilterRecipeJson request)
     {
         var response = await useCase.Execute(request);
         if (response.Recipes.Any())

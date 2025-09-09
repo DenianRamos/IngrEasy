@@ -4,5 +4,5 @@ namespace IngrEasy.Domain.Repositories.Recipe;
 
 public interface IRecipeReadOnlyRepository
 {
-    Task <IList<Domain.Entities.Recipe>> Filter(Task<Entities.User> user, FilterRecipesDto filters);
+    Task <IList<Domain.Entities.Recipe>> Filter(Entities.User user, FilterRecipesDto filters);
 }

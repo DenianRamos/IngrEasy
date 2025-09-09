@@ -23,7 +23,7 @@ public class FilterRecipeUseCase : IFilterRecipeUseCase
         _repository = repository;
     }
 
-    public async Task<ResponseRecipesJson> Execute(RequestsFilterRecipeJson request)
+    public async Task<ResponseRecipesJson> Execute(RequestFilterRecipeJson request)
     {
         Validate(request);
         
@@ -38,7 +38,7 @@ public class FilterRecipeUseCase : IFilterRecipeUseCase
         Difficulties = request.Difficulty.Distinct().Select(d => (Domain.Enum.Difficulty)d).ToList()
         };
         
-        var recipes = await _repository.Filter(loggedUser, filters);
+        var recipes = await _repository.Filter(await loggedUser, filters);
         
         return new ResponseRecipesJson
         {
@@ -48,7 +48,7 @@ public class FilterRecipeUseCase : IFilterRecipeUseCase
 
 
 
-    private static void Validate(RequestsFilterRecipeJson request)
+    private static void Validate(RequestFilterRecipeJson request)
     {
         var validator = new FilterRecipeValidator();
         var result = validator.Validate(request);

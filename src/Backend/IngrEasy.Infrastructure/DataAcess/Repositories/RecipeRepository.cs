@@ -18,7 +18,7 @@ public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepos
 
     public async Task Add(Recipe recipe) => await _dbContext.Recipes.AddAsync(recipe);
 
-    public async Task<IList<Recipe>> Filter(Task<User> user, FilterRecipesDto filters)
+    public async Task<IList<Recipe>> Filter(User user, FilterRecipesDto filters)
     {
         var query = _dbContext.Recipes.AsNoTracking().Include(recipe => recipe.Ingredients).Where(recipe => recipe.Active && recipe.UserId == user.Id);
 
