@@ -2,6 +2,7 @@ using AutoMapper;
 using IngrEasy.Communication.Requests;
 using IngrEasy.Communication.Response;
 using IngrEasy.Domain;
+using IngrEasy.Domain.Entities;
 using IngrEasy.Domain.Extensions;
 using IngrEasy.Domain.Repositories.Recipe;
 using IngrEasy.Domain.Services.LoggedUser;

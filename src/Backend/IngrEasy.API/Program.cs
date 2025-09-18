@@ -16,7 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
+
+
 {
+    options.OperationFilter<IdsFilter>();
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Jwt Authorization header using the Bearer scheme.
@@ -42,7 +45,10 @@ builder.Services.AddSwaggerGen(options =>
             new string[] {}
         }
     });
+    
 });
+
+
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();

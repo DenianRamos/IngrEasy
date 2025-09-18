@@ -45,11 +45,21 @@ public class AutoMapping : Profile
         CreateMap<Recipe, ResponseRegisteredRecipeJson>()
             .ForMember(dest => dest.Id, opt => 
                 opt.MapFrom( src => _sqidsEncoder.Encode(src.Id)));
-
         CreateMap<Recipe, ResponseShortRecipeJson>().ForMember(dest => dest.Id,
                 config => config.MapFrom(source => _sqidsEncoder.Encode(source.Id)))
             .ForMember(dest => dest.AmountIngredient,
                 config => config.MapFrom(source => source.Ingredients.Count));
-
+        CreateMap<Recipe, ResponseRecipeJson>()
+            .ForMember(dest => dest.Id, opt =>
+                opt.MapFrom(src => _sqidsEncoder.Encode(src.Id)))
+            .ForMember(dest => dest.DishTypes, opt => opt.MapFrom(source => source.DishTypes!.Select(r => r.Type)));
+        
+        CreateMap<Ingredient, ResponseIngredientJson>()
+            .ForMember(dest => dest.Id, opt =>
+                opt.MapFrom(src => _sqidsEncoder.Encode(src.Id)));
+        
+        CreateMap<Instruction, ResponseInstructionJson>()
+            .ForMember(dest => dest.Id, opt =>
+                opt.MapFrom(src => _sqidsEncoder.Encode(src.Id)));
     }
 }

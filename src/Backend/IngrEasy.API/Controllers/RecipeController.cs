@@ -1,5 +1,7 @@
 using IngrEasy.API.Attributes;
+using IngrEasy.API.Binders;
 using IngrEasy.Application.UseCases.Recipe.Filter;
+using IngrEasy.Application.UseCases.Recipe.GetById;
 using IngrEasy.Application.UseCases.Recipe.Register;
 using IngrEasy.Communication.Requests;
 using IngrEasy.Communication.Response;
@@ -34,6 +36,16 @@ public class RecipeController : IngrEasyController
         }
         return NoContent();
         
+    }
+    
+    [HttpGet]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseRecipeJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById([FromServices] IGetRecipeByIdUseCase useCase, [FromRoute] [ModelBinder(typeof(IngrEasyIdBinder))]  int id)
+    {
+        var response = await useCase.Execute(id);
+        return Ok(response);
     }
     
 

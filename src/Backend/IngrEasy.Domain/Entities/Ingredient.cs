@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using IngrEasy.Domain.Entities;
 
 namespace IngrEasy.Domain;
 

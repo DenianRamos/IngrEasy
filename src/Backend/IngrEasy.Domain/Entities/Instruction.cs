@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IngrEasy.Domain;
+namespace IngrEasy.Domain.Entities;
 
 [Table("Instructions")]
 public class Instruction : EntityBase

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IngrEasy.Application.Services.AutoMapper;
 using IngrEasy.Application.UseCases.Recipe.Filter;
+using IngrEasy.Application.UseCases.Recipe.GetById;
 using IngrEasy.Application.UseCases.Recipe.Register;
 using IngrEasy.Application.UseCases.User.ChangePassword;
 using IngrEasy.Application.UseCases.User.Login;
@@ -18,23 +19,22 @@ public static class DependencyInjectionExtension
 {
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        AddAutoMapper(services,configuration);
+        AddIdEnconder(services,configuration);
+        AddAutoMapper(services);
         AddUseCases(services);
     }
 
-    private static void AddAutoMapper(this IServiceCollection services, IConfiguration configuration)
+    private static void AddAutoMapper(this IServiceCollection services)
     {
-        var sqids = new SqidsEncoder<int>(new()
-        {
-        MinLength = 3,
-        Alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!
-        });
+       
         
-        services.AddScoped(opt => new MapperConfiguration(opt =>
+        services.AddScoped(opt => new MapperConfiguration(autoMapperOption =>
         {
-            opt.AddProfile(new AutoMapping(sqids));
+            var sqids = opt.GetService<SqidsEncoder<int>>()!;
+            autoMapperOption.AddProfile(new AutoMapping(sqids));
         }).CreateMapper());
     }
+
     
     private static void AddUseCases(this IServiceCollection services)
     {
@@ -45,6 +45,19 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUpdateUseCase, UpdateUseCase>();
         services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
         services.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
+        services.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();
+    }
+    
+    
+    private static void AddIdEnconder(this IServiceCollection services, IConfiguration configuration)
+    {
+        var sqids = new SqidsEncoder<int>(new()
+        {
+            MinLength = 3,
+            Alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!
+        });
+
+        services.AddSingleton(sqids);
     }
     
 }

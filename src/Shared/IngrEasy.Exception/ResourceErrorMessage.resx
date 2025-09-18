@@ -159,4 +159,7 @@
   <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
     <value>Unsupported dish type</value>
   </data>
+  <data name="RECIPE_NOT_FOUND" xml:space="preserve">
+    <value>Recipe Not Found</value>
+  </data>
 </root>

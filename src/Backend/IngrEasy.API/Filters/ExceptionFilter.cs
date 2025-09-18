@@ -35,6 +35,13 @@ public class ExceptionFilter : IExceptionFilter
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.Result = new BadRequestObjectResult(new ResponseErrorJson(exception!.ErrorMessage));
         }
+        
+        else if (context.Exception is NotFoundException)
+        {
+            var exception = context.Exception as ErrorOnValidationException;
+            context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.Result = new NotFoundObjectResult(new ResponseErrorJson(exception!.ErrorMessage));
+        }
 
     }
 
