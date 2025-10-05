@@ -1,4 +1,5 @@
 ﻿using CommonTestUtilities.Entities;
+using CommonTestUtilities.IdEncryption;
 using IngrEasy.Communication.Enums;
 using IngrEasy.Domain;
 using IngrEasy.Infrastructure.DataAcess;
@@ -57,6 +58,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     
     
     public string GetRecipeTitle() => _recipe.Title;
+
+    public string GetRecipeId() => IdEncripterBuilder.Build().Encode(_recipe.Id);
     
     public Difficulty GetRecipeDifficulty() => _recipe.Difficulty!.Value;
     public CookingTime GetRecipeCookingTime() => _recipe.CookingTime!.Value;

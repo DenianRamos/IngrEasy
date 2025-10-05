@@ -1,5 +1,6 @@
 using IngrEasy.API.Attributes;
 using IngrEasy.API.Binders;
+using IngrEasy.Application.UseCases.Recipe.Delete;
 using IngrEasy.Application.UseCases.Recipe.Filter;
 using IngrEasy.Application.UseCases.Recipe.GetById;
 using IngrEasy.Application.UseCases.Recipe.Register;
@@ -17,7 +18,8 @@ public class RecipeController : IngrEasyController
     [ProducesResponseType(typeof(ResponseRegisteredRecipeJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
 
-    public async Task<IActionResult> Register([FromServices] IRegisterRecipeUseCase useCase, [FromBody] RequestRecipeJson request)
+    public async Task<IActionResult> Register([FromServices] IRegisterRecipeUseCase useCase,
+        [FromBody] RequestRecipeJson request)
     {
         var response = await useCase.Execute(request);
         return CreatedAtAction(nameof(Register), response);
@@ -34,19 +36,34 @@ public class RecipeController : IngrEasyController
         {
             return Ok(response);
         }
+
         return NoContent();
-        
+
     }
-    
+
     [HttpGet]
     [Route("{id}")]
     [ProducesResponseType(typeof(ResponseRecipeJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById([FromServices] IGetRecipeByIdUseCase useCase, [FromRoute] [ModelBinder(typeof(IngrEasyIdBinder))]  int id)
+    public async Task<IActionResult> GetById([FromServices] IGetRecipeByIdUseCase useCase,
+        [FromRoute] [ModelBinder(typeof(IngrEasyIdBinder))] int id)
     {
         var response = await useCase.Execute(id);
         return Ok(response);
     }
-    
+
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseRecipeJson), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+
+    public async Task<IActionResult> Delete([FromServices] IDeleteRecipeUseCase useCase,
+        [FromRoute] [ModelBinder(typeof(IngrEasyIdBinder))]
+        int id)
+    {
+       await useCase.Execute(id);
+       return NoContent();
+    }
+
 
 }
