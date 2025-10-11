@@ -25,13 +25,13 @@ public class UpdateRecipeUseCase : IUpdateRecipeUseCase
         _mapper = mapper;
     }
     
-    public async Task Execute(int id, RequestRecipeJson request)
+    public async Task Execute(int recipeId, RequestRecipeJson request)
     {
         Validate(request);
 
         var loggedUser =  await _loggedUser.User();
         
-        var recipe = await _updateOnlyRepository.GetById(loggedUser, id);
+        var recipe = await _updateOnlyRepository.GetById(loggedUser, recipeId);
 
         if (recipe is null)
             throw new NotFoundException(ResourceErrorMessage.RECIPE_NOT_FOUND);

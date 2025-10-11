@@ -4,5 +4,5 @@ namespace IngrEasy.Application.UseCases.Recipe.Update;
 
 public interface IUpdateRecipeUseCase
 {
-    Task Execute(int id, RequestRecipeJson request);
+    Task Execute(int recipeId, RequestRecipeJson request);
 }
