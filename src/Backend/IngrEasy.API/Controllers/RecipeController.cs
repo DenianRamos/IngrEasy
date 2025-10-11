@@ -4,6 +4,7 @@ using IngrEasy.Application.UseCases.Recipe.Delete;
 using IngrEasy.Application.UseCases.Recipe.Filter;
 using IngrEasy.Application.UseCases.Recipe.GetById;
 using IngrEasy.Application.UseCases.Recipe.Register;
+using IngrEasy.Application.UseCases.Recipe.Update;
 using IngrEasy.Communication.Requests;
 using IngrEasy.Communication.Response;
 using Microsoft.AspNetCore.Mvc;
@@ -63,6 +64,18 @@ public class RecipeController : IngrEasyController
     {
        await useCase.Execute(id);
        return NoContent();
+    }
+    
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseRecipeJson), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update([FromServices] IUpdateRecipeUseCase useCase,
+        [FromRoute] [ModelBinder(typeof(IngrEasyIdBinder))] int id,
+        [FromBody] RequestRecipeJson request)
+    {
+        await useCase.Execute(id, request);
+        return NoContent();
     }
 
 

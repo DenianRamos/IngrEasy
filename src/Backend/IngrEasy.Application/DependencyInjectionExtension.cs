@@ -4,12 +4,14 @@ using IngrEasy.Application.UseCases.Recipe.Delete;
 using IngrEasy.Application.UseCases.Recipe.Filter;
 using IngrEasy.Application.UseCases.Recipe.GetById;
 using IngrEasy.Application.UseCases.Recipe.Register;
+using IngrEasy.Application.UseCases.Recipe.Update;
 using IngrEasy.Application.UseCases.User.ChangePassword;
 using IngrEasy.Application.UseCases.User.Login;
 using IngrEasy.Application.UseCases.User.Login.DoLogin;
 using IngrEasy.Application.UseCases.User.Profile;
 using IngrEasy.Application.UseCases.User.Register;
 using IngrEasy.Application.UseCases.User.Update;
+using IngrEasy.Domain.Repositories.Recipe;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sqids;
@@ -48,7 +50,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
         services.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();
         services.AddScoped<IDeleteRecipeUseCase, DeleteRecipeUseCase>();
-    }
+        services.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();    }
     
     
     private static void AddIdEnconder(this IServiceCollection services, IConfiguration configuration)

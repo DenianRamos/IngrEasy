@@ -3,10 +3,11 @@ using IngrEasy.Domain.Entities;
 using IngrEasy.Domain.Extensions;
 using IngrEasy.Domain.Repositories.Recipe;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace IngrEasy.Infrastructure.DataAcess.Repositories;
 
-public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository
+public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeUpdateOnlyRepository
 {
 
     private readonly IngrEasyDbContext _dbContext;
@@ -57,12 +58,25 @@ public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepos
         
     }
 
-    public async Task<Recipe?> GetById(User user, int recipeId)
+    async Task<Recipe?> IRecipeReadOnlyRepository.GetById(User user, int recipeId)
     {
-        return await  _dbContext.Recipes.AsNoTracking()
+        return await  GetFullRecipe().AsNoTracking().FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
+    }
+    
+    async Task<Recipe?> IRecipeUpdateOnlyRepository.GetById(User user, int recipeId)
+    {
+        return await  GetFullRecipe().FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
+    }
+
+    public void Update(Recipe recipe) => _dbContext.Recipes.Update(recipe);
+
+
+
+    private IIncludableQueryable<Recipe, IList<DishType>?> GetFullRecipe()
+    {
+        return _dbContext.Recipes
             .Include(recipe => recipe.Ingredients)
             .Include(recipe => recipe.Instructions)
-            .Include(recipe => recipe.DishTypes)
-            .FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
+            .Include(recipe => recipe.DishTypes);
     }
 }
