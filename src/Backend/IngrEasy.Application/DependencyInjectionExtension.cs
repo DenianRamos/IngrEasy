@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IngrEasy.Application.Services.AutoMapper;
+using IngrEasy.Application.UseCases.Dashboard;
 using IngrEasy.Application.UseCases.Recipe.Delete;
 using IngrEasy.Application.UseCases.Recipe.Filter;
 using IngrEasy.Application.UseCases.Recipe.GetById;
@@ -50,7 +51,9 @@ public static class DependencyInjectionExtension
         services.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
         services.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();
         services.AddScoped<IDeleteRecipeUseCase, DeleteRecipeUseCase>();
-        services.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();    }
+        services.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
+        services.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
+    }
     
     
     private static void AddIdEnconder(this IServiceCollection services, IConfiguration configuration)

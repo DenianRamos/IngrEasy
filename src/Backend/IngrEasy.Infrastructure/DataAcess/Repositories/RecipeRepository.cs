@@ -62,7 +62,19 @@ public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepos
     {
         return await  GetFullRecipe().AsNoTracking().FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
     }
-    
+
+    public async Task<IList<Recipe>> GetForDashboard(User user)
+    {
+        return await _dbContext.Recipes
+            .AsNoTracking()
+            .Include(c => c.Ingredients)
+            .Where(c => c.Active && c.UserId == user.Id)
+            .OrderByDescending(r => r.CreatedOn)
+            .Take(5)
+            .ToListAsync();
+    }
+
+
     async Task<Recipe?> IRecipeUpdateOnlyRepository.GetById(User user, int recipeId)
     {
         return await  GetFullRecipe().FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
