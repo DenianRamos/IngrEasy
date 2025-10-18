@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
 using IngrEasy.Application.UseCases.Recipe;
@@ -56,7 +57,7 @@ public class RecipeValidatorTest
     [InlineData("")]
     [InlineData("              ")]
     [InlineData(null)]
-    
+    [SuppressMessage("Usage", "xUnit1012:Null should only be used for nullable parameters")]
     public void Error_Invalid_Title_CookingTime(string title)
     {
         var validator = new RecipeValidator();
@@ -132,6 +133,8 @@ public class RecipeValidatorTest
     [InlineData("")]
     [InlineData("              ")]
     [InlineData(null)]
+    [SuppressMessage("Usage", "xUnit1012:Null should only be used for nullable parameters")]
+
     public void Error_Empty_Value_Ingredient(string ingredient)
     {
         var validator = new RecipeValidator();

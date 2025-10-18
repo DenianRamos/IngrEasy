@@ -34,7 +34,7 @@ public class RegisterRecipeUseCase : IRegisterRecipeUseCase
 
         var instruction = request.Instructions.OrderBy(i => i.Step).ToList();
         for (var index = 0; index < instruction.Count; index++)
-            instruction.ElementAt(index).Step = index + 1;
+            instruction[index].Step = index + 1;
 
         recipe.Instructions = _mapper.Map<IList<Instruction>>(instruction);
 
