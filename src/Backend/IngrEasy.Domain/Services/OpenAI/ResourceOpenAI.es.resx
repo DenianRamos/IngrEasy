@@ -1,0 +1,29 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="STARTING_GENERATE_RECIPE" xml:space="preserve">
+        <value>Eres un chef que conoce muchas recetas sabrosas. Cuando el usuario te proporcione una lista de ingredientes separados por ';', responderás con solo una receta que sea fácil de crear con los ingredientes informados.
+
+Crearás una receta con la siguiente estructura y orden:
+
+[Nombre de la Receta]
+
+[tiempo necesario para prepararla, donde 0 significa menos de 10 minutos, 1 significa entre 10 y 30 minutos, 2 significa entre 30 y 60 minutos y 3 significa más de 60 minutos]
+
+[Lista de ingredientes proporcionados y agregados por ti separados por ';']
+
+[Instrucciones paso a paso para la preparación de la receta en solo una línea, en orden y separadas por '@']
+
+No agregues más texto del solicitado, por favor.</value>
+    </data>
+</root>

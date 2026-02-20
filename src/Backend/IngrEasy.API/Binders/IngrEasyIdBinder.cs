@@ -22,7 +22,7 @@ public class IngrEasyIdBinder : IModelBinder
             
             var value = valueProviderResult.FirstValue;
             
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrWhiteSpace(value))
             {
                 return Task.CompletedTask;
             }

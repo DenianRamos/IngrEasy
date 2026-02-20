@@ -5,6 +5,7 @@ using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
 using IngrEasy.Application.UseCases.Recipe.Register;
+using IngrEasy.Exception;
 using IngrEasy.Exception.ExceptionBase;
 
 namespace UseCases.Test.Recipe;
@@ -48,9 +49,10 @@ public class RegisterRecipeUseCaseTest
         };
         
         await act.Should().ThrowAsync<ErrorOnValidationException>()
-            .Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains("Titulo Não pode ser vazio"));
+            .Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains(ResourceErrorMessage.TITLE_EMPTY));
         
     }
+
 
 
 

@@ -164,4 +164,14 @@
     <value>Receta no encontrada
 </value>
   </data>
+  <data name="INVALID_NUMBER_INGREDIENTS" xml:space="preserve">
+    <value>Ungültige Anzahl von Zutaten. Die Liste muss zwischen 1 und 5 Zutaten enthalten.</value>
+  </data>
+  <data name="DUPLICATED_INGREDIENTS_IN_lIST" xml:space="preserve">
+    <value>Hay ingredientes duplicados en la lista.</value>
+  </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Nur Bilder (JPG, JPEG, PNG) enthalten kein Öl.
+</value>
+  </data>
 </root>

@@ -4,6 +4,7 @@ using FluentAssertions;
 using IngrEasy.Application.UseCases.Recipe;
 using IngrEasy.Communication.Enums;
 using IngrEasy.Communication.Requests;
+using IngrEasy.Exception;
 
 namespace Validator.tests.Recipe;
 
@@ -34,7 +35,7 @@ public class RecipeValidatorTest
         var result = validator.Validate(request);
         
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == "Cooking Time Nao suportado");
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == ResourceErrorMessage.COOKING_TIME_NOT_SUPPORTED);
     }
     
     [Fact]
@@ -49,7 +50,7 @@ public class RecipeValidatorTest
         var result = validator.Validate(request);
         
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == "Dificuldade Nao suportado");
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == ResourceErrorMessage.DIFFICULTY_LEVEL_NOT_SUPPORTED);
 
     }
     
@@ -69,7 +70,7 @@ public class RecipeValidatorTest
         var result = validator.Validate(request);
         
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == "Titulo Não pode ser vazio");
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == ResourceErrorMessage.TITLE_EMPTY);
     }
 
 
@@ -111,7 +112,7 @@ public class RecipeValidatorTest
         
         var result = validator.Validate(request);
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals("Dish Type Nao suportado"));
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessage.DISH_TYPE_NOT_SUPPORTED));
     }
     
     [Fact]
@@ -126,7 +127,7 @@ public class RecipeValidatorTest
         var result = validator.Validate(request);
         
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == "No minimo um ingrediente");
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == ResourceErrorMessage.INGREDIENTS_MINIMUM);
     }
     
     [Theory]
@@ -146,7 +147,7 @@ public class RecipeValidatorTest
         var result = validator.Validate(request);
         
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == "Ingrediente vazio");
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == ResourceErrorMessage.INGREDIENT_EMPTY);
     }
     
     
@@ -162,7 +163,7 @@ public class RecipeValidatorTest
         var result = validator.Validate(request);
         
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == "Duas ou mais instruções com a mesma ordem");
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage == ResourceErrorMessage.DUPLICATED_INSTRUCTIONS);
     }
 
     [Fact]
@@ -176,7 +177,7 @@ public class RecipeValidatorTest
 
         result.IsValid.Should().BeFalse();
         result.Errors.Should().ContainSingle().And
-            .Contain(e => e.ErrorMessage.Equals("Texto deve ter no maximo 2000 caracteres"));
+            .Contain(e => e.ErrorMessage.Equals(ResourceErrorMessage.INSTRUCTION_TEXT_MAX_LENGTH));
 
     }
     

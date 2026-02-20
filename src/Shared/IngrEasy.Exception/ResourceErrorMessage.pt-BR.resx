@@ -162,4 +162,14 @@
   <data name="RECIPE_NOT_FOUND" xml:space="preserve">
     <value>Receita não encontrada</value>
   </data>
+  <data name="INVALID_NUMBER_INGREDIENTS" xml:space="preserve">
+    <value>Número inválido de ingredientes. A lista deve conter entre 1 e 5 ingredientes.</value>
+  </data>
+  <data name="DUPLICATED_INGREDIENTS_IN_lIST" xml:space="preserve">
+    <value>Existem ingredientes duplicados na lista.</value>
+  </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Somente imagens (JPG, JPEG, PNG) são aceitas.
+</value>
+  </data>
 </root>

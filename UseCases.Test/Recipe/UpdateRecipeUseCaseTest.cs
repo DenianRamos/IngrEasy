@@ -66,7 +66,7 @@ public class UpdateRecipeUseCaseTest
         };
 
         await act.Should().ThrowAsync<ErrorOnValidationException>().
-            Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains("Titulo Não pode ser vazio"));
+            Where(e => e.ErrorMessage.Count == 1 && e.ErrorMessage.Contains(ResourceErrorMessage.TITLE_EMPTY));
     }
 
 

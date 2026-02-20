@@ -162,4 +162,41 @@
   <data name="RECIPE_NOT_FOUND" xml:space="preserve">
     <value>Recipe Not Found</value>
   </data>
+  <data name="INVALID_NUMBER_INGREDIENTS" xml:space="preserve">
+    <value>Invalid number of ingredients. The list must contain between 1 and 5 ingredients.</value>
+  </data>
+  <data name="DUPLICATED_INGREDIENTS_IN_lIST" xml:space="preserve">
+    <value>There are duplicate ingredients in the list.</value>
+  </data>
+  <data name="TITLE_EMPTY" xml:space="preserve">
+    <value>Title cannot be empty</value>
+  </data>
+  <data name="INGREDIENTS_MINIMUM" xml:space="preserve">
+    <value>At least one ingredient is required</value>
+  </data>
+  <data name="INSTRUCTIONS_MINIMUM" xml:space="preserve">
+    <value>At least one instruction is required</value>
+  </data>
+  <data name="INGREDIENT_EMPTY" xml:space="preserve">
+    <value>Ingredient cannot be empty</value>
+  </data>
+  <data name="STEP_GREATER_THAN_ZERO" xml:space="preserve">
+    <value>Step must be greater than 0</value>
+  </data>
+  <data name="INSTRUCTION_TEXT_EMPTY" xml:space="preserve">
+    <value>Text cannot be empty</value>
+  </data>
+  <data name="INSTRUCTION_TEXT_MAX_LENGTH" xml:space="preserve">
+    <value>Text must have at most 2000 characters</value>
+  </data>
+  <data name="DUPLICATED_INSTRUCTIONS" xml:space="preserve">
+    <value>Two or more instructions have the same order</value>
+  </data>
+  <data name="INGREDIENT_INVALID_FORMAT" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Only images (JPG, JPEG, PNG) are accepted.
+</value>
+  </data>
 </root>

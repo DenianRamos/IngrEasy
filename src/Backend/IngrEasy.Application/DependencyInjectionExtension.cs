@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using IngrEasy.Application.Services.AutoMapper;
 using IngrEasy.Application.UseCases.Dashboard;
+using IngrEasy.Application.UseCases.Generate;
 using IngrEasy.Application.UseCases.Recipe.Delete;
 using IngrEasy.Application.UseCases.Recipe.Filter;
 using IngrEasy.Application.UseCases.Recipe.GetById;
+using IngrEasy.Application.UseCases.Recipe.Image;
 using IngrEasy.Application.UseCases.Recipe.Register;
 using IngrEasy.Application.UseCases.Recipe.Update;
 using IngrEasy.Application.UseCases.User.ChangePassword;
@@ -53,6 +55,9 @@ public static class DependencyInjectionExtension
         services.AddScoped<IDeleteRecipeUseCase, DeleteRecipeUseCase>();
         services.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
         services.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
+        services.AddScoped<IGenerateRecipeUseCase, GenerateRecipeUseCase>();
+        services.AddScoped<IAddUpdateImageCoverUseCase,AddUpdateImageCoverUseCase>();
+        
     }
     
     

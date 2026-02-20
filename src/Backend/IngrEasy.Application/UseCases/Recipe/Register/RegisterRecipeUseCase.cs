@@ -28,7 +28,7 @@ public class RegisterRecipeUseCase : IRegisterRecipeUseCase
     public async Task<ResponseRegisteredRecipeJson> Execute(RequestRecipeJson request)
     {
         Validate(request);
-        var loggedUser = _loggedUser.User();
+        var loggedUser = await _loggedUser.User();
         var recipe = _mapper.Map<Domain.Entities.Recipe>(request);
         recipe.UserId = loggedUser.Id;
 

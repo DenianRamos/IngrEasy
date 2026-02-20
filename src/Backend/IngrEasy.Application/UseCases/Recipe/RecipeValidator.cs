@@ -9,20 +9,21 @@ public class RecipeValidator : AbstractValidator<RequestRecipeJson>
 {
     public RecipeValidator()
     {
-        RuleFor(recipe => recipe.Title).NotEmpty().WithMessage("Titulo Não pode ser vazio");
-        RuleFor(recipe => recipe.CookingTime).IsInEnum().WithMessage("Cooking Time Nao suportado");
-        RuleFor(recipe => recipe.Difficulty).IsInEnum().WithMessage("Dificuldade Nao suportado");
-        RuleFor(recipe => recipe.Ingredients.Count).GreaterThan(0).WithMessage("No minimo um ingrediente");
-        RuleFor(recipe => recipe.Instructions.Count).GreaterThan(0).WithMessage("No minimo uma instrução");
-        RuleForEach(recipe => recipe.DishTypes).IsInEnum().WithMessage("Dish Type Nao suportado");
-        RuleForEach(recipe => recipe.Ingredients).NotEmpty().WithMessage("Ingrediente vazio");
+        RuleFor(recipe => recipe.Title).NotEmpty().WithMessage(ResourceErrorMessage.TITLE_EMPTY);
+        RuleFor(recipe => recipe.CookingTime).IsInEnum().WithMessage(ResourceErrorMessage.COOKING_TIME_NOT_SUPPORTED);
+        RuleFor(recipe => recipe.Difficulty).IsInEnum().WithMessage(ResourceErrorMessage.DIFFICULTY_LEVEL_NOT_SUPPORTED);
+        RuleFor(recipe => recipe.Ingredients.Count).GreaterThan(0).WithMessage(ResourceErrorMessage.INGREDIENTS_MINIMUM);
+        RuleFor(recipe => recipe.Instructions.Count).GreaterThan(0).WithMessage(ResourceErrorMessage.INSTRUCTIONS_MINIMUM);
+        RuleForEach(recipe => recipe.DishTypes).IsInEnum().WithMessage(ResourceErrorMessage.DISH_TYPE_NOT_SUPPORTED);
+        RuleForEach(recipe => recipe.Ingredients).NotEmpty().WithMessage(ResourceErrorMessage.INGREDIENT_EMPTY);
         RuleForEach(recipe => recipe.Instructions).ChildRules(instruction =>
         {
-        instruction.RuleFor(instruction => instruction.Step).GreaterThan(0).WithMessage("Passo deve ser maior que 0");
-        instruction.RuleFor(instruction => instruction.Text)
-            .NotEmpty().WithMessage("Texto não pode ser vazio").MaximumLength(2000).WithMessage("Texto deve ter no maximo 2000 caracteres");
+            instruction.RuleFor(instruction => instruction.Step).GreaterThan(0).WithMessage(ResourceErrorMessage.STEP_GREATER_THAN_ZERO);
+            instruction.RuleFor(instruction => instruction.Text)
+                .NotEmpty().WithMessage(ResourceErrorMessage.INSTRUCTION_TEXT_EMPTY)
+                .MaximumLength(2000).WithMessage(ResourceErrorMessage.INSTRUCTION_TEXT_MAX_LENGTH);
         });
         RuleFor(recipe => recipe.Instructions).Must(instruction =>
-            instruction.Select(i => i.Step).Distinct().Count() == instruction.Count).WithMessage("Duas ou mais instruções com a mesma ordem");
+            instruction.Select(i => i.Step).Distinct().Count() == instruction.Count).WithMessage(ResourceErrorMessage.DUPLICATED_INSTRUCTIONS);
     }
 }

@@ -24,9 +24,9 @@ public class GetRecipeByIdUseCase : IGetRecipeByIdUseCase
 
     public async Task<ResponseRecipeJson> Execute(int recipeId)
     {
-        var loggedUser = _loggedUser.User();
+        var loggedUser = await _loggedUser.User();
 
-        var recipe = await _repository.GetById(await loggedUser, recipeId);
+        var recipe = await _repository.GetById(loggedUser, recipeId);
 
         if (recipe is null)
             throw new NotFoundException(ResourceErrorMessage.RECIPE_NOT_FOUND);

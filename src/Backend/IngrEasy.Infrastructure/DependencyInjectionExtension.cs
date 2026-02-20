@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Azure.Storage.Blobs;
 using FluentMigrator.Runner;
 using IngrEasy.Domain;
 using IngrEasy.Domain.Repositories.Recipe;
@@ -6,12 +7,16 @@ using IngrEasy.Domain.Repositories.User;
 using IngrEasy.Domain.Security.Criptography;
 using IngrEasy.Domain.Security.Tokens;
 using IngrEasy.Domain.Services.LoggedUser;
+using IngrEasy.Domain.Services.OpenAI;
+using IngrEasy.Domain.Services.Storage;
 using IngrEasy.Infrastructure.DataAcess;
 using IngrEasy.Infrastructure.DataAcess.Repositories;
 using IngrEasy.Infrastructure.Extensions;
 using IngrEasy.Infrastructure.Security.Cryptography;
 using IngrEasy.Infrastructure.Security.Tokens.Acess;
 using IngrEasy.Infrastructure.Services;
+using IngrEasy.Infrastructure.Services.GoogleAI;
+using IngrEasy.Infrastructure.Services.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,20 +27,21 @@ public static class DependencyInjectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        AddPasswordEncrypter(services,configuration);
+        AddPasswordEncrypter(services, configuration);
         AddRepositories(services);
-        AddToken(services,configuration);
+        AddToken(services, configuration);
         AddLoggedUser(services);
-        
+        AddAzureStorage(services, configuration);
+
         if (configuration.IsTestEnvironment())
             return;
-
-        AddDbContext(services,configuration);
-        AddFluentMigrator(services,configuration);
+        AddGemini(services, configuration);
+        AddDbContext(services, configuration);
+        AddFluentMigrator(services, configuration);
 
     }
 
-    private static void AddDbContext( IServiceCollection services, IConfiguration configuration)
+    private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<IngrEasyDbContext>(options =>
         {
@@ -43,7 +49,7 @@ public static class DependencyInjectionExtension
         });
     }
 
-    private static void AddRepositories( IServiceCollection services)
+    private static void AddRepositories(IServiceCollection services)
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
@@ -52,17 +58,20 @@ public static class DependencyInjectionExtension
         services.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
         services.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
         services.AddScoped<IRecipeUpdateOnlyRepository, RecipeRepository>();
+        
+
     }
 
-    private static void AddFluentMigrator( IServiceCollection services, IConfiguration configuration)
+    private static void AddFluentMigrator(IServiceCollection services, IConfiguration configuration)
     {
-        
+
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services.AddFluentMigratorCore().ConfigureRunner(opt =>
         {
             opt.AddMySql8()
-                .WithGlobalConnectionString(connectionString).ScanIn(Assembly.Load("IngrEasy.Infrastructure")).For.All();
+                .WithGlobalConnectionString(connectionString).ScanIn(Assembly.Load("IngrEasy.Infrastructure")).For
+                .All();
         });
     }
 
@@ -71,9 +80,9 @@ public static class DependencyInjectionExtension
     {
         var expirationTime = configuration.GetValue<uint>("Settings:Jwt:ExpirationTime");
         var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
-        
-        services.AddScoped<IAccessTokenGenerator>( option => new JwtTokenGenerator(signingKey!,expirationTime));
-        services.AddScoped<IAcessTokenValidator>( option => new JwtTokenValidator(signingKey!));
+
+        services.AddScoped<IAccessTokenGenerator>(option => new JwtTokenGenerator(signingKey!, expirationTime));
+        services.AddScoped<IAcessTokenValidator>(option => new JwtTokenValidator(signingKey!));
     }
 
     private static void AddPasswordEncrypter(this IServiceCollection services, IConfiguration configuration)
@@ -81,4 +90,24 @@ public static class DependencyInjectionExtension
         var additionalKey = configuration.GetValue<string>("Settings:Password:AdditionalKey");
         services.AddScoped<IPasswordEncrypter>(opt => new Sha512Encrypter(additionalKey!));
     }
-    private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();}
+
+    private static void AddGemini(IServiceCollection services, IConfiguration configuration)
+    {
+        var googleConfig = configuration.GetSection("Settings:GoogleAI").Get<GoogleAIConfig>();
+        services.AddSingleton(googleConfig!);
+        services.AddScoped<IGenerateRecipeAI, GeminiService>();
+    }
+
+    private static void AddAzureStorage(IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetValue<string>("Settings:BlobStorage:Azure");
+
+        services.AddScoped <IBlobStorageService>(c => new AzureStorageService(new BlobServiceClient(connectionString)));
+    }
+
+
+private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();}
+
+    
+
+    

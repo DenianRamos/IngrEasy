@@ -163,4 +163,14 @@
     <value>Rezept nicht gefunden
 </value>
   </data>
+  <data name="INVALID_NUMBER_INGREDIENTS" xml:space="preserve">
+    <value>Número inválido de ingredientes. La lista debe contener entre 1 y 5 ingredientes.</value>
+  </data>
+  <data name="DUPLICATED_INGREDIENTS_IN_lIST" xml:space="preserve">
+    <value>Es gibt doppelte Zutaten in der Liste.</value>
+  </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Es werden ausschließlich Bilder (JPG, JPEG, PNG) akzeptiert.
+</value>
+  </data>
 </root>

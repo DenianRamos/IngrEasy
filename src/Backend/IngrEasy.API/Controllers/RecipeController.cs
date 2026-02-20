@@ -1,8 +1,10 @@
 using IngrEasy.API.Attributes;
 using IngrEasy.API.Binders;
+using IngrEasy.Application.UseCases.Generate;
 using IngrEasy.Application.UseCases.Recipe.Delete;
 using IngrEasy.Application.UseCases.Recipe.Filter;
 using IngrEasy.Application.UseCases.Recipe.GetById;
+using IngrEasy.Application.UseCases.Recipe.Image;
 using IngrEasy.Application.UseCases.Recipe.Register;
 using IngrEasy.Application.UseCases.Recipe.Update;
 using IngrEasy.Communication.Requests;
@@ -23,7 +25,7 @@ public class RecipeController : IngrEasyController
         [FromBody] RequestRecipeJson request)
     {
         var response = await useCase.Execute(request);
-        return CreatedAtAction(nameof(Register), response);
+        return Created(string.Empty, response);
     }
 
     [HttpPost("filter")]
@@ -75,6 +77,28 @@ public class RecipeController : IngrEasyController
         [FromBody] RequestRecipeJson request)
     {
         await useCase.Execute(id, request);
+        return NoContent();
+    }
+    
+    [HttpPost("generate")]
+    [ProducesResponseType(typeof(ResponseGeneratedRecipeJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GenerateRecipe([FromServices] IGenerateRecipeUseCase useCase,[FromBody] RequestGeneratedRecipeJson request)
+    {
+        {
+            var response = await useCase.Execute(request);
+            return Ok(response);
+        }
+    }
+
+    [HttpPut("image/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateImage([FromServices] IAddUpdateImageCoverUseCase useCase,
+        [FromRoute] [ModelBinder(typeof(IngrEasyIdBinder))] int id, IFormFile file)
+    {
+        await useCase.Execute(id, file);
         return NoContent();
     }
 

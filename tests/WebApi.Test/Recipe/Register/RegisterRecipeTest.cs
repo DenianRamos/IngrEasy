@@ -3,6 +3,7 @@ using System.Text.Json;
 using CommonTestUtilities.Requests;
 using CommonTestUtilities.Tokens;
 using FluentAssertions;
+using IngrEasy.Exception;
 
 namespace WebApi.Test.Recipe.Register;
 
@@ -56,17 +57,12 @@ public class RegisterRecipeTest : IngrEasyClassFixture
 
         var errors =responseData.RootElement.GetProperty("errors").EnumerateArray();
         
-        var expectedMessage = "Titulo Não pode ser vazio";
+        var expectedMessage = ResourceErrorMessage.TITLE_EMPTY;
         
         errors.Should().HaveCount(1).And.Contain(c => c.GetString()!.Equals(expectedMessage));
         
         
     }
-
-
-
-
-
 
 
 }
